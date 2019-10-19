@@ -196,10 +196,14 @@ play("Carousel", module)
       h, containerWidth, [h(Carousel, { props: { navigationEnabled: true, scrollPerPage: false, loop: true } }, generateSlideImages(h))]
     )
   )
-  .add("With customized navigation buttons", h => createContainer(
-      h, containerWidth, [h('style', '.VueCarousel-navigation-button { font-size: 36px; }'), h(Carousel, { props: { paginationColor: '#fac232', paginationActiveColor: '#c9750c', navigationEnabled: true, navigationNextLabel: '👉', navigationPrevLabel: '👈' } }, generateSlideImages(h))]
-    )
-  )
+  .add("With customized navigation buttons", h => createContainer(h, containerWidth, [
+    h('style', '.VueCarousel-navigation-button { font-size: 36px; }'),
+    h(Carousel, { props: { paginationColor: '#fac232', paginationActiveColor: '#c9750c', navigationEnabled: true } }, [
+      ...generateSlideImages(h),
+      h('span', { slot: 'navigationNextLabel' }, '👉'),
+      h('span', { slot: 'navigationPrevLabel' }, '👈')
+    ])
+  ]))
   .add("navigation-click event", {
     template:
       `<div style="width: 100%; display: flex; justify-content: center; margin-top: 40px;">

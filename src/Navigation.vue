@@ -8,7 +8,11 @@
       v-on:click.prevent="triggerPageAdvance('backward')"
       v-bind:class="{ 'VueCarousel-navigation--disabled': !canAdvanceBackward }"
       v-bind:style="`padding: ${clickTargetSize}px; margin-right: -${clickTargetSize}px;`"
-      v-html="prevLabel"></button>
+    >
+      <slot name="prevLabel">
+        &#9664;
+      </slot>
+    </button>
     <button
       type="button"
       aria-label="Next page"
@@ -17,7 +21,11 @@
       v-on:click.prevent="triggerPageAdvance('forward')"
       v-bind:class="{ 'VueCarousel-navigation--disabled': !canAdvanceForward }"
       v-bind:style="`padding: ${clickTargetSize}px; margin-left: -${clickTargetSize}px;`"
-      v-html="nextLabel"></button>
+    >
+      <slot name="nextLabel">
+        &#9654;
+      </slot>
+    </button>
   </div>
 </template>
 
@@ -32,20 +40,6 @@ export default {
     clickTargetSize: {
       type: Number,
       default: 8
-    },
-    /**
-     * Text content of the navigation next button
-     */
-    nextLabel: {
-      type: String,
-      default: "&#9654"
-    },
-    /**
-     * Text content of the navigation prev button
-     */
-    prevLabel: {
-      type: String,
-      default: "&#9664"
     }
   },
   computed: {

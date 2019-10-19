@@ -76,8 +76,6 @@ export default {
 | navigateTo                  | Number, Array  | 0       | Listen for an external navigation request using this prop. When the supplied prop is of type Number the slide with the matching index is animated into view, however you can disable this animation by supplying an Array consisting of exactly two element: the new slide index and a boolean indication whether the change should be animated or not (eg. [3, false] would mean "go to the slide with index 3 without animation").                                                                                                                                                                                                                            |
 | navigationClickTargetSize   | Number  | 8       | Amount of padding to apply around the label in pixels.                                                                                                                                                                                                                                |
 | navigationEnabled           | Boolean | false   | Flag to render the navigation component (next/prev buttons).                                                                                                                                                                                                                          |
-| navigationNextLabel         | String  | ▶       | Text content of the navigation next button.                                                                                                                                                                                                                                           |
-| navigationPrevLabel         | String  | ◀       | Text content of the navigation prev button.                                                                                                                                                                                                                                           |
 | paginationActiveColor       | String  | #000000 | The fill color of the active pagination dot. Any valid CSS color is accepted.                                                                                                                                                                                                         |
 | paginationColor             | String  | #efefef | The fill color of pagination dots. Any valid CSS color is accepted.                                                                                                                                                                                                                   |
 | paginationPosition          | String  | bottom  | The position of pagination dots. Possible values are `bottom`, `bottom-overlay`, `top` and `top-overlay`. The overlay values place the pagination component over the images.                                                                                                          |
@@ -141,6 +139,43 @@ To listen for the 'slideclick' event you can do the following:
   handleSlideClick (dataset) => {
     console.log(dataset.index, dataset.name)
   }
+```
+
+To customize navigation buttons labels you can use named slots `navigationPrevLabel` & `navigationNextLabel`:
+
+``` vue
+  <carousel :navigationEnabled="true">
+    <template slot="navigationPrevLabel">
+      👈
+    </template>
+    <template slot="navigationNextLabel">
+      👉
+    </template>
+    <slide>
+      Slide 1 Content
+    </slide>
+    <slide>
+      Slide 2 Content
+    </slide>
+  </carousel>
+```
+
+Or if you use vue 2.6+ then use slots with the following syntax:
+``` vue
+  <carousel :navigationEnabled="true">
+    <template v-slot:navigationPrevLabel>
+      👈
+    </template>
+    <template v-slot:navigationNextLabel>
+      👉
+    </template>
+    <slide>
+      Slide 1 Content
+    </slide>
+    <slide>
+      Slide 2 Content
+    </slide>
+  </carousel>
 ```
 ## Development
 

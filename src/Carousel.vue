@@ -33,10 +33,17 @@
       <navigation
         v-if="isNavigationRequired"
         :clickTargetSize="navigationClickTargetSize"
-        :nextLabel="navigationNextLabel"
-        :prevLabel="navigationPrevLabel"
         @navigationclick="handleNavigation"
-      />
+      >
+        <template slot="prevLabel" v-if="$slots.navigationPrevLabel">
+          <slot name="navigationPrevLabel">
+          </slot>
+        </template>
+        <template slot="nextLabel" v-if="$slots.navigationNextLabel">
+          <slot name="navigationNextLabel">
+          </slot>
+        </template>
+      </navigation>
     </slot>
 
     <slot name="pagination" v-if="paginationEnabled">
@@ -201,20 +208,6 @@ export default {
     navigationEnabled: {
       type: Boolean,
       default: false
-    },
-    /**
-     * Text content of the navigation next button
-     */
-    navigationNextLabel: {
-      type: String,
-      default: "&#9654"
-    },
-    /**
-     * Text content of the navigation prev button
-     */
-    navigationPrevLabel: {
-      type: String,
-      default: "&#9664"
     },
     /**
      * The fill color of the active pagination dot
